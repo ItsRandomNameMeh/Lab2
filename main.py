@@ -5,20 +5,25 @@ class Hero():
     __damage = 0
     __speed = 0
     def __init__(self, numb, team):
+        self.numb = numb
+        self.team = team
         pass
+
+    def __del__(self):#метод удаляющий ненужный экземпляры, когда на них больше нет внешних ссылок
+        print(f"Удаление экземпляра {self}")
 
     def __str__(self):
         return f"Hero: {self.numb}, {self.team}, {self.damage}, {self.speed}"
-    @property
+   # @property
     def numb(self):
         return self.numb
-    @property
+  #  @property
     def team(self):
         return self.team
-    @property
+  #  @property
     def damage(self):
         return self.damage
-    @property
+   # @property
     def speed(self):
         return self.speed
 
@@ -35,3 +40,5 @@ class Paladin(Hero):
     def follow(self):#свойство следования, зависит от номера мага, за которым будет следовать
         return self.follow
 
+ls = Hero(1,4)
+print(ls.__dict__)
