@@ -34,3 +34,4 @@ class Paladin(Hero):
     @property
     def follow(self):#свойство следования, зависит от номера мага, за которым будет следовать
         return self.follow
+
