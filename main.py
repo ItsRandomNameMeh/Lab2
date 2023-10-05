@@ -1,56 +1,41 @@
 import random
+import Wizard
+import Paladin
+from collections import Counter #метод для получения нужных данных об объектах класса
+
+Wizards = {}#Магит будут храниться в словаре, первое число - номер мага, второе - команда
+for i in range(3):
+    Wizards[f'{i+1}1'] = i
 
 
-class Hero():
-    __numb = 0 #номер объекта
-    __team = 0 #свойство принадлежности к команде
-    __damage = 0
-    __speed = 0
-    def __init__(self, numb, team):
-        self.numb = numb
-        self.team = team
+Palads = {}#Паладины будут храниться в словаре. Ключ - номер паладина, значение - команда
 
-
-    def __del__(self):#метод удаляющий ненужный экземпляры, когда на них больше нет внешних ссылок
-        print(f"Удаление экземпляра {self}")
-
-    def __str__(self):
-        return f"Hero: {self.numb}, {self.team}, {self.damage}, {self.speed}"
-   # @property
-    def numb(self):
-        return self.numb
-  #  @property
-    def team(self):
-        return self.team
-  #  @property
-    def damage(self):
-        return self.damage
-   # @property
-    def speed(self):
-        return self.speed
-
-
-class Wizard(Hero):
-    __lvl = 0
-    @property
-    def lvl(self):#уровень мага. по условию этот свойсто есть только у мага
-        return self.lvl
-
-class Paladin(Hero):
-    __follow = 0#Номер мага за которым будет следовать
-    def get_follow(self, item):#свойство следования, зависит от номера мага, за которым будет следовать
-        return self.__follow
-
-    def set_follow(self, follow):
-        self.__follow = follow
-
-
-
-FirstWiz = Wizard(11,0)
-SecondWix = Wizard(21,1)
-ThirdWiz = Wizard(31,2)
-
-for i in range(2):
+for i in range(12): #случайное определение 10 паладинов в одну из трех команд
     a = random.randint(0,2)
-    Palads = Paladin(int(f"{a+1}"+"2"), a)
+    Palads[f'{i+1}2'] = a
+
+value_counts = Counter(Palads.values())
+max_value = max(value_counts.values())
+max_elements = [key for key, value in Palads.items() if value_counts[value] == max_value]
+print(Palads)
+
+print(f'Команда, в которой оказалось макисмальное количество паладинов - {Palads[max_elements[0]]}\n'
+      f'В нее входят паладины:')
+for elem in max_elements:
+    print(elem)
+#делаем лист из всех значений словаря Паладинов и считаем количество паладинов на каждую команду
+#где команда - числовое значение от 0 до 2 включительно
+print(f'В первой(нулевой) команде {list(Palads.values()).count(0)} паладинов,\n'
+      f'Во второй команде {list(Palads.values()).count(1)} паладинов, \n'
+      f'В третьей команде {list(Palads.values()).count(2)}  паладинов')
+
+
+
+
+
+
+
+
+print(f"Паладин из команды №1 следует за своим магом с номером 11")
+
 
