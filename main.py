@@ -1,3 +1,5 @@
+import random
+
 
 class Hero():
     __numb = 0 #номер объекта
@@ -7,7 +9,7 @@ class Hero():
     def __init__(self, numb, team):
         self.numb = numb
         self.team = team
-        pass
+
 
     def __del__(self):#метод удаляющий ненужный экземпляры, когда на них больше нет внешних ссылок
         print(f"Удаление экземпляра {self}")
@@ -35,10 +37,20 @@ class Wizard(Hero):
         return self.lvl
 
 class Paladin(Hero):
-    __follow = 0
-    @property
-    def follow(self):#свойство следования, зависит от номера мага, за которым будет следовать
-        return self.follow
+    __follow = 0#Номер мага за которым будет следовать
+    def get_follow(self, item):#свойство следования, зависит от номера мага, за которым будет следовать
+        return self.__follow
 
-ls = Hero(1,4)
-print(ls.__dict__)
+    def set_follow(self, follow):
+        self.__follow = follow
+
+
+
+FirstWiz = Wizard(11,0)
+SecondWix = Wizard(21,1)
+ThirdWiz = Wizard(31,2)
+
+for i in range(2):
+    a = random.randint(0,2)
+    Palads = Paladin(int(f"{a+1}"+"2"), a)
+
