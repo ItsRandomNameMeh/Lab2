@@ -4,17 +4,18 @@ import Paladin
 from collections import Counter #метод для получения нужных данных об объектах класса
 
 
-
-
-
-Wizards = {}#Магит будут храниться в словаре, первое число - номер мага, второе - команда
+Wizards = {}#Маги будут храниться в словаре, первое число - номер мага, второе - команда
 for i in range(3):
-    Wizards[f'{i+1}1'] = i
+    Wizards[f'{Wizard.Wizard(i+1,i)}1'] = i
+
+all_obj = Wizard.Wizard.instances
+print(all_obj)
+
 
 Palads = {}#Паладины будут храниться в словаре. Ключ - номер паладина, значение - команда
 for i in range(12): #случайное определение 10 паладинов в одну из трех команд
     a = random.randint(0,2)
-    Palads[f'{i+1}2'] = a
+    Palads[f'{Paladin.Paladin(i+1,i)}2'] = a
 
 
 def MaxTeam():
@@ -27,6 +28,7 @@ def MaxTeam():
           f'В нее входят паладины:')
     for elem in max_elements:
         print(elem)
+    return max_elements
 
 def CommandCounts():
     #делаем лист из всех значений словаря Паладинов и считаем количество паладинов на каждую команду
@@ -41,8 +43,15 @@ def Move():
             a = j
     print(f"Паладин {a} из команды №1 следует за своим магом с номером 11")
 
+def KillTop():
+    print("Увольняем мага из команды с максимальным числом паладинов")
+    for i in Wizards:
+        if Wizards[i] == Palads[max_elem[0]]:
+            Wizards[i] = None
 
 
-MaxTeam()
+
+max_elem = MaxTeam()
 CommandCounts()
 Move()
+KillTop()
