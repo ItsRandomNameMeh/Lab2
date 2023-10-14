@@ -1,4 +1,5 @@
 import random
+import Hero
 import Wizard
 import Paladin
 from collections import Counter #метод для получения нужных данных об объектах класса
@@ -8,14 +9,20 @@ Wizards = {}#Маги будут храниться в словаре, перв�
 for i in range(3):
     Wizards[f'{Wizard.Wizard(i+1,i)}1'] = i
 
-all_obj = Wizard.Wizard.instances
-print(all_obj)
+all_obj_W = Wizard.Wizard.instances[0:3]#срезы нужны, т.к в instances записаны все наследники Hero
+print(all_obj_W)
 
 
 Palads = {}#Паладины будут храниться в словаре. Ключ - номер паладина, значение - команда
 for i in range(12): #случайное определение 10 паладинов в одну из трех команд
     a = random.randint(0,2)
-    Palads[f'{Paladin.Paladin(i+1,i)}2'] = a
+    Palads[f'{Paladin.Paladin(i+1,a)}'] = a
+
+all_obj_P = Paladin.Paladin.instances[3::]
+print(all_obj_P)
+print(Palads)
+for i in all_obj_P:
+    print(f'Paladin{Paladin.Paladin.get_numb(i)}: team {Paladin.Paladin.get_team(i)}')
 
 
 def MaxTeam():
@@ -30,6 +37,9 @@ def MaxTeam():
         print(elem)
     return max_elements
 
+
+
+
 def CommandCounts():
     #делаем лист из всех значений словаря Паладинов и считаем количество паладинов на каждую команду
     #где команда - числовое значение от 0 до 2 включительно
@@ -38,10 +48,10 @@ def CommandCounts():
           f'В третьей команде {list(Palads.values()).count(2)}  паладинов')
 def Move():
     a = 0
-    for j in Palads:
-        if Palads[j] == 1:
+    for j in all_obj_P:
+        if Paladin.Paladin.get_team(j) == 1:
             a = j
-    print(f"Паладин {a} из команды №1 следует за своим магом с номером 11")
+    print(f"Паладин {Paladin.Paladin.get_numb(a)} из команды №1 следует за своим магом с номером 11")
 
 def KillTop():
     print("Увольняем мага из команды с максимальным числом паладинов")

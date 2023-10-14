@@ -5,8 +5,8 @@ class Hero():
     __speed = 0
     instances = []
     def __init__(self, numb, team):
-        self.numb = numb
-        self.team = team
+        self.__numb = numb
+        self.__team = team
         self.instances.append(self)
 
 
